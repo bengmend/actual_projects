@@ -1,8 +1,3 @@
-The issue is due to the way the form data is being accessed. The `FormData` API works best with forms that have input fields with `name` attributes. In the provided HTML, the `input` and `textarea` elements are missing the `name` attributes. Adding the `name` attributes will fix this problem.
-
-Here's the updated code with `name` attributes added to the input fields and textareas:
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -241,6 +236,3 @@ Here's the updated code with `name` attributes added to the input fields and tex
     </script>
 </body>
 </html>
-```
-
-Now, each input and textarea has a `name` attribute, which allows the `FormData` object to correctly retrieve their values.
