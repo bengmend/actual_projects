@@ -1,0 +1,246 @@
+The issue is due to the way the form data is being accessed. The `FormData` API works best with forms that have input fields with `name` attributes. In the provided HTML, the `input` and `textarea` elements are missing the `name` attributes. Adding the `name` attributes will fix this problem.
+
+Here's the updated code with `name` attributes added to the input fields and textareas:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information Collection Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            margin-bottom: 10px;
+        }
+        .section ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .section ul li {
+            margin-bottom: 10px;
+        }
+        .section label {
+            font-weight: bold;
+        }
+        .section textarea, .section input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        .output {
+            white-space: pre-wrap;
+            background-color: #f0f0f0;
+            padding: 20px;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Information Collection Form</h1>
+    
+    <form id="infoForm">
+        <div class="section">
+            <h2>Business Use Case With Mend and Challenges</h2>
+            <ul>
+                <li>
+                    <label for="short-term-use-case">Short-term</label>
+                    <textarea id="short-term-use-case" name="short-term-use-case" rows="3"></textarea>
+                </li>
+                <li>
+                    <label for="mid-term-use-case">Mid-term (if different from above)</label>
+                    <textarea id="mid-term-use-case" name="mid-term-use-case" rows="3"></textarea>
+                </li>
+                <li>
+                    <label for="long-term-use-case">Long-term (if different from above)</label>
+                    <textarea id="long-term-use-case" name="long-term-use-case" rows="3"></textarea>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Steps to Achieve</h2>
+            <ul>
+                <li>
+                    <label for="short-term-steps">Short Term</label>
+                    <textarea id="short-term-steps" name="short-term-steps" rows="3"></textarea>
+                </li>
+                <li>
+                    <label for="mid-term-steps">Mid-term</label>
+                    <textarea id="mid-term-steps" name="mid-term-steps" rows="3"></textarea>
+                </li>
+                <li>
+                    <label for="long-term-steps">Longer-term (if needed)</label>
+                    <textarea id="long-term-steps" name="long-term-steps" rows="3"></textarea>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Technical Stack</h2>
+            <ul>
+                <li>
+                    <label for="repos">Repo(s):</label>
+                    <input type="text" id="repos" name="repos">
+                </li>
+                <li>
+                    <label for="pipelines">Pipelines:</label>
+                    <input type="text" id="pipelines" name="pipelines">
+                </li>
+                <li>
+                    <label for="languages">Languages / Package Managers:</label>
+                    <input type="text" id="languages" name="languages">
+                </li>
+                <li>
+                    <label for="container-repos">Container Repos?</label>
+                    <input type="text" id="container-repos" name="container-repos">
+                </li>
+                <li>
+                    <label for="issue-trackers">Issue Trackers?</label>
+                    <input type="text" id="issue-trackers" name="issue-trackers">
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Key contact(s) who you regularly meet with</h2>
+            <ul>
+                <li>
+                    <label for="contact1-name">Name:</label>
+                    <input type="text" id="contact1-name" name="contact1-name">
+                    <label for="contact1-geo">Geo:</label>
+                    <input type="text" id="contact1-geo" name="contact1-geo">
+                    <label for="contact1-focus">Focus:</label>
+                    <input type="text" id="contact1-focus" name="contact1-focus">
+                    <label for="contact1-kpis">KPIs:</label>
+                    <input type="text" id="contact1-kpis" name="contact1-kpis">
+                    <label for="contact1-other">Other: Something interesting about them to talk about</label>
+                    <textarea id="contact1-other" name="contact1-other" rows="2"></textarea>
+                </li>
+                <li>
+                    <label for="contact2-name">Name:</label>
+                    <input type="text" id="contact2-name" name="contact2-name">
+                    <label for="contact2-geo">Geo:</label>
+                    <input type="text" id="contact2-geo" name="contact2-geo">
+                    <label for="contact2-focus">Focus:</label>
+                    <input type="text" id="contact2-focus" name="contact2-focus">
+                    <label for="contact2-kpis">KPIs:</label>
+                    <input type="text" id="contact2-kpis" name="contact2-kpis">
+                    <label for="contact2-other">Other: Something interesting about them to talk about</label>
+                    <textarea id="contact2-other" name="contact2-other" rows="2"></textarea>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Expansion / Growth Possibilities</h2>
+            <ul>
+                <li>
+                    <label for="expansion1-what">What:</label>
+                    <input type="text" id="expansion1-what" name="expansion1-what">
+                    <label for="expansion1-steps">What steps:</label>
+                    <textarea id="expansion1-steps" name="expansion1-steps" rows="2"></textarea>
+                </li>
+                <li>
+                    <label for="expansion2-what">What:</label>
+                    <input type="text" id="expansion2-what" name="expansion2-what">
+                    <label for="expansion2-steps">What steps:</label>
+                    <textarea id="expansion2-steps" name="expansion2-steps" rows="2"></textarea>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Critical Support (linkable) / Challenges</h2>
+            <ul>
+                <li>
+                    <label for="critical-support">Ticket #000555</label>
+                    <textarea id="critical-support" name="critical-support" rows="3">Problem about client…</textarea>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>JIRA Tickets</h2>
+            <ul>
+                <li>
+                    <label for="jira-fee">FEE-*** - Short description (make link)</label>
+                    <input type="text" id="jira-fee" name="jira-fee">
+                </li>
+                <li>
+                    <label for="jira-tka">TKA-*** Short description</label>
+                    <input type="text" id="jira-tka" name="jira-tka">
+                </li>
+                <li>
+                    <label for="jira-wsh">WSH-*** Short description</label>
+                    <input type="text" id="jira-wsh" name="jira-wsh">
+                </li>
+            </ul>
+        </div>
+        
+        <button type="button" onclick="collateInfo()">Submit</button>
+    </form>
+    
+    <div id="output" class="output"></div>
+
+    <script>
+        function collateInfo() {
+            const form = document.getElementById('infoForm');
+            const output = document.getElementById('output');
+            const data = new FormData(form);
+            
+            let result = 'Collected Information:\n\n';
+            
+            result += 'Business Use Case With Mend and Challenges:\n';
+            result += '- Short-term: ' + data.get('short-term-use-case') + '\n';
+            result += '- Mid-term: ' + data.get('mid-term-use-case') + '\n';
+            result += '- Long-term: ' + data.get('long-term-use-case') + '\n\n';
+            
+            result += 'Steps to Achieve:\n';
+            result += '- Short Term: ' + data.get('short-term-steps') + '\n';
+            result += '- Mid-term: ' + data.get('mid-term-steps')
+
+ + '\n';
+            result += '- Longer-term: ' + data.get('long-term-steps') + '\n\n';
+            
+            result += 'Technical Stack:\n';
+            result += '- Repo(s): ' + data.get('repos') + '\n';
+            result += '- Pipelines: ' + data.get('pipelines') + '\n';
+            result += '- Languages / Package Managers: ' + data.get('languages') + '\n';
+            result += '- Container Repos?: ' + data.get('container-repos') + '\n';
+            result += '- Issue Trackers?: ' + data.get('issue-trackers') + '\n\n';
+            
+            result += 'Key contact(s) who you regularly meet with:\n';
+            result += '- Name: ' + data.get('contact1-name') + '\n  Geo: ' + data.get('contact1-geo') + '\n  Focus: ' + data.get('contact1-focus') + '\n  KPIs: ' + data.get('contact1-kpis') + '\n  Other: ' + data.get('contact1-other') + '\n\n';
+            result += '- Name: ' + data.get('contact2-name') + '\n  Geo: ' + data.get('contact2-geo') + '\n  Focus: ' + data.get('contact2-focus') + '\n  KPIs: ' + data.get('contact2-kpis') + '\n  Other: ' + data.get('contact2-other') + '\n\n';
+            
+            result += 'Expansion / Growth Possibilities:\n';
+            result += '- What: ' + data.get('expansion1-what') + '\n  What steps: ' + data.get('expansion1-steps') + '\n';
+            result += '- What: ' + data.get('expansion2-what') + '\n  What steps: ' + data.get('expansion2-steps') + '\n\n';
+            
+            result += 'Critical Support (linkable) / Challenges:\n';
+            result += '- Ticket #000555: ' + data.get('critical-support') + '\n\n';
+            
+            result += 'JIRA Tickets:\n';
+            result += '- FEE-***: ' + data.get('jira-fee') + '\n';
+            result += '- TKA-***: ' + data.get('jira-tka') + '\n';
+            result += '- WSH-***: ' + data.get('jira-wsh') + '\n';
+            
+            output.textContent = result;
+        }
+    </script>
+</body>
+</html>
+```
+
+Now, each input and textarea has a `name` attribute, which allows the `FormData` object to correctly retrieve their values.
