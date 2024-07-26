@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information Collection Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            margin-bottom: 10px;
+        }
+        .section ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .section ul li {
+            margin-bottom: 10px;
+        }
+        .section label {
+            font-weight: bold;
+        }
+        .section textarea, .section input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        .output {
+            white-space: pre-wrap;
+            background-color: #f0f0f0;
+            padding: 20px;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Information Collection Form</h1>
+    
+    <form id="infoForm">
+        <!-- All your existing sections go here... -->
+        
+        <div class="buttons">
+            <button type="button" onclick="collateInfo()">Submit</button>
+            <button type="button" onclick="copyToClipboard()">Copy to Clipboard</button>
+        </div>
+    </form>
+    
+    <div id="output" class="output"></div>
+
+    <script>
+        function addContact() {
+            // your existing implementation
+        }
+
+        function addExpansion() {
+            // your existing implementation
+        }
+
+        function addCriticalSupport() {
+            // your existing implementation
+        }
+
+        function addJiraTicket() {
+            // your existing implementation
+        }
+
+        function collateInfo() {
+            const form = document.getElementById('infoForm');
+            const output = document.getElementById('output');
+            const data = new FormData(form);
+            
+            let result = '<h2>Collected Information:</h2>';
+            
+            // Pain points handling
+            const appendInfo = (title, description) => {
+                result += description ? `<p><strong>${title}:</strong> ${description}</p>` : '';
+            };
+
+            // Collect sections accordingly
+            appendInfo('Short-term', data.get('short-term-use-case'));
+            appendInfo('Mid-term', data.get('mid-term-use-case'));
+            appendInfo('Long-term', data.get('long-term-use-case'));
+            appendInfo('Short Term Steps', data.get('short-term-steps'));
+            appendInfo('Mid-term Steps', data.get('mid-term-steps'));
+            appendInfo('Longer-term Steps', data.get('long-term-steps'));
+            appendInfo('Repo(s)', data.get('repos'));
+            appendInfo('Pipelines', data.get('pipelines'));
+            appendInfo('Languages / Package Managers', data.get('languages'));
+            appendInfo('Container Repos?', data.get('container-repos'));
+            appendInfo('Issue Trackers?', data.get('issue-trackers'));
+
+            // Handle contacts
+            const contacts = document.querySelectorAll('#contacts-section li');
+            contacts.forEach((contact, index) => {
+                appendInfo(`Contact ${index + 1} Name`, data.get(`contact${index + 1}-name`));
+                // Repeat for other fields as necessary
+            });
+
+            // Handle expansion
+            const expansions = document.querySelectorAll('#expansion-section li');
+            expansions.forEach((expansion, index) => {
+                appendInfo(`Expansion ${index + 1} What`, data.get(`expansion${index + 1}-what`));
+                // Repeat for steps...
+            });
+
+            // Handle critical support and JIRA tickets similarly...
+
+            // Finally set the innerHTML of the output
+            output.innerHTML = result;
+        }
+
+        function copyToClipboard() {
+            const output = document.getElementById('output');
+            const range = document.createRange();
+            range.selectNode(output);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+            alert('Output copied to clipboard!');
+        }
+    </script>
+</body>
+</html>
