@@ -165,7 +165,7 @@
             <ul id="critical-support-section">
                 <li>
                     <label for="critical-support">Ticket #000555</label>
-                    <textarea id="critical-support" name="critical-support" rows="3">Problem about client…</textarea>
+                    <textarea id="critical-support" name="critical-support" rows="3"></textarea>
                 </li>
             </ul>
             <button type="button" onclick="addCriticalSupport()">Add More</button>
@@ -236,8 +236,8 @@
             const count = section.children.length + 1;
             const li = document.createElement('li');
             li.innerHTML = `
-                <label for="critical-support${count}">Ticket #000555</label>
-                <textarea id="critical-support${count}" name="critical-support${count}" rows="3">Problem about client…</textarea>
+                <label for="critical-support${count}">Example: Ticket #000555 or Client won't use userKeys</label>
+                <textarea id="critical-support${count}" name="critical-support${count}" rows="3"></textarea>
             `;
             section.appendChild(li);
         }
