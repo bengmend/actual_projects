@@ -39,6 +39,9 @@
             border: 1px solid #ccc;
             margin-top: 20px;
         }
+        .buttons {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -109,7 +112,7 @@
 
         <div class="section">
             <h2>Key contact(s) who you regularly meet with</h2>
-            <ul>
+            <ul id="contacts-section">
                 <li>
                     <label for="contact1-name">Name:</label>
                     <input type="text" id="contact1-name" name="contact1-name">
@@ -135,11 +138,12 @@
                     <textarea id="contact2-other" name="contact2-other" rows="2"></textarea>
                 </li>
             </ul>
+            <button type="button" onclick="addContact()">Add More</button>
         </div>
 
         <div class="section">
             <h2>Expansion / Growth Possibilities</h2>
-            <ul>
+            <ul id="expansion-section">
                 <li>
                     <label for="expansion1-what">What:</label>
                     <input type="text" id="expansion1-what" name="expansion1-what">
@@ -153,85 +157,139 @@
                     <textarea id="expansion2-steps" name="expansion2-steps" rows="2"></textarea>
                 </li>
             </ul>
+            <button type="button" onclick="addExpansion()">Add More</button>
         </div>
 
         <div class="section">
-            <h2>Critical Support (linkable) / Challenges</h2>
-            <ul>
+            <h2>Critical Support (clickable) / Challenges</h2>
+            <ul id="critical-support-section">
                 <li>
                     <label for="critical-support">Ticket #000555</label>
                     <textarea id="critical-support" name="critical-support" rows="3">Problem about client…</textarea>
                 </li>
             </ul>
+            <button type="button" onclick="addCriticalSupport()">Add More</button>
         </div>
 
         <div class="section">
-            <h2>JIRA Tickets</h2>
-            <ul>
+            <h2>JIRA Tickets or Slack Chains</h2>
+            <ul id="jira-tickets-section">
                 <li>
-                    <label for="jira-fee">FEE-*** - Short description (make link)</label>
-                    <input type="text" id="jira-fee" name="jira-fee">
-                </li>
-                <li>
-                    <label for="jira-tka">TKA-*** Short description</label>
+                    <label for="jira-tka">TKA-*** Short description (make clickable)</label>
                     <input type="text" id="jira-tka" name="jira-tka">
                 </li>
                 <li>
-                    <label for="jira-wsh">WSH-*** Short description</label>
+                    <label for="jira-wsh">WSH-*** Short description (make clickable)</label>
                     <input type="text" id="jira-wsh" name="jira-wsh">
                 </li>
+                <li>
+                    <label for="slack-chain">Slack Chain*** - Short description (make clickable)</label>
+                    <input type="text" id="slack-chain" name="slack-chain">
+                </li>
             </ul>
+            <button type="button" onclick="addJiraTicket()">Add More</button>
         </div>
         
-        <button type="button" onclick="collateInfo()">Submit</button>
+        <div class="buttons">
+            <button type="button" onclick="collateInfo()">Submit</button>
+            <button type="button" onclick="copyToClipboard()">Copy to Clipboard</button>
+        </div>
     </form>
     
     <div id="output" class="output"></div>
 
     <script>
+        function addContact() {
+            const section = document.getElementById('contacts-section');
+            const count = section.children.length + 1;
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <label for="contact${count}-name">Name:</label>
+                <input type="text" id="contact${count}-name" name="contact${count}-name
+
+">
+                <label for="contact${count}-geo">Geo:</label>
+                <input type="text" id="contact${count}-geo" name="contact${count}-geo">
+                <label for="contact${count}-focus">Focus:</label>
+                <input type="text" id="contact${count}-focus" name="contact${count}-focus">
+                <label for="contact${count}-kpis">KPIs:</label>
+                <input type="text" id="contact${count}-kpis" name="contact${count}-kpis">
+                <label for="contact${count}-other">Other: Something interesting about them to talk about</label>
+                <textarea id="contact${count}-other" name="contact${count}-other" rows="2"></textarea>
+            `;
+            section.appendChild(li);
+        }
+
+        function addExpansion() {
+            const section = document.getElementById('expansion-section');
+            const count = section.children.length + 1;
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <label for="expansion${count}-what">What:</label>
+                <input type="text" id="expansion${count}-what" name="expansion${count}-what">
+                <label for="expansion${count}-steps">What steps:</label>
+                <textarea id="expansion${count}-steps" name="expansion${count}-steps" rows="2"></textarea>
+            `;
+            section.appendChild(li);
+        }
+
+        function addCriticalSupport() {
+            const section = document.getElementById('critical-support-section');
+            const count = section.children.length + 1;
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <label for="critical-support${count}">Ticket #000555</label>
+                <textarea id="critical-support${count}" name="critical-support${count}" rows="3">Problem about client…</textarea>
+            `;
+            section.appendChild(li);
+        }
+
+        function addJiraTicket() {
+            const section = document.getElementById('jira-tickets-section');
+            const count = section.children.length + 1;
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <label for="jira-tka${count}">TKA-*** Short description (make clickable)</label>
+                <input type="text" id="jira-tka${count}" name="jira-tka${count}">
+            `;
+            section.appendChild(li);
+        }
+
         function collateInfo() {
             const form = document.getElementById('infoForm');
-            const output = document.getElementById('output');
-            const data = new FormData(form);
-            
-            let result = 'Collected Information:\n\n';
-            
-            result += 'Business Use Case With Mend and Challenges:\n';
-            result += '- Short-term: ' + data.get('short-term-use-case') + '\n';
-            result += '- Mid-term: ' + data.get('mid-term-use-case') + '\n';
-            result += '- Long-term: ' + data.get('long-term-use-case') + '\n\n';
-            
-            result += 'Steps to Achieve:\n';
-            result += '- Short Term: ' + data.get('short-term-steps') + '\n';
-            result += '- Mid-term: ' + data.get('mid-term-steps')
+            const formData = new FormData(form);
+            const sections = {};
 
- + '\n';
-            result += '- Longer-term: ' + data.get('long-term-steps') + '\n\n';
-            
-            result += 'Technical Stack:\n';
-            result += '- Repo(s): ' + data.get('repos') + '\n';
-            result += '- Pipelines: ' + data.get('pipelines') + '\n';
-            result += '- Languages / Package Managers: ' + data.get('languages') + '\n';
-            result += '- Container Repos?: ' + data.get('container-repos') + '\n';
-            result += '- Issue Trackers?: ' + data.get('issue-trackers') + '\n\n';
-            
-            result += 'Key contact(s) who you regularly meet with:\n';
-            result += '- Name: ' + data.get('contact1-name') + '\n  Geo: ' + data.get('contact1-geo') + '\n  Focus: ' + data.get('contact1-focus') + '\n  KPIs: ' + data.get('contact1-kpis') + '\n  Other: ' + data.get('contact1-other') + '\n\n';
-            result += '- Name: ' + data.get('contact2-name') + '\n  Geo: ' + data.get('contact2-geo') + '\n  Focus: ' + data.get('contact2-focus') + '\n  KPIs: ' + data.get('contact2-kpis') + '\n  Other: ' + data.get('contact2-other') + '\n\n';
-            
-            result += 'Expansion / Growth Possibilities:\n';
-            result += '- What: ' + data.get('expansion1-what') + '\n  What steps: ' + data.get('expansion1-steps') + '\n';
-            result += '- What: ' + data.get('expansion2-what') + '\n  What steps: ' + data.get('expansion2-steps') + '\n\n';
-            
-            result += 'Critical Support (linkable) / Challenges:\n';
-            result += '- Ticket #000555: ' + data.get('critical-support') + '\n\n';
-            
-            result += 'JIRA Tickets:\n';
-            result += '- FEE-***: ' + data.get('jira-fee') + '\n';
-            result += '- TKA-***: ' + data.get('jira-tka') + '\n';
-            result += '- WSH-***: ' + data.get('jira-wsh') + '\n';
-            
-            output.textContent = result;
+            for (let [key, value] of formData.entries()) {
+                const sectionName = key.split('-')[0];
+                if (!sections[sectionName]) {
+                    sections[sectionName] = [];
+                }
+                sections[sectionName].push({ key, value });
+            }
+
+            let outputText = '';
+
+            for (let section in sections) {
+                outputText += `${section.replace(/-/g, ' ')}:\n`;
+                sections[section].forEach(item => {
+                    if (item.value.trim() !== '') {
+                        // Break apart multiline text into bullets
+                        const lines = item.value.split('\n').map(line => `• ${line.trim()}`).join('\n');
+                        outputText += `${item.key.replace(/-/g, ' ')}:\n${lines}\n`;
+                    }
+                });
+                outputText += '\n';
+            }
+
+            document.getElementById('output').textContent = outputText;
+        }
+
+        function copyToClipboard() {
+            const output = document.getElementById('output').textContent;
+            navigator.clipboard.writeText(output).then(() => {
+                alert('Text copied to clipboard');
+            });
         }
     </script>
 </body>
