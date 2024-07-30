@@ -253,18 +253,12 @@
             section.appendChild(li);
         }
 
-        function collateInfo() {
-            const form = document.getElementById('infoForm');
-            const formData = new FormData(form);
-            const sections = {};
+        if (item.value.trim() !== '') {
+    // Break apart multiline text into bullets
+    const lines = item.value.split('\n').map(line => `• ${line.trim()}`).join('\n');
+    outputText += `${item.key.replace(/-/g, ' ')}:\n${lines}\n`;
+}
 
-            for (let [key, value] of formData.entries()) {
-                const sectionName = key.split('-')[0];
-                if (!sections[sectionName]) {
-                    sections[sectionName] = [];
-                }
-                sections[sectionName].push({ key, value });
-            }
 
             let outputText = '';
 
