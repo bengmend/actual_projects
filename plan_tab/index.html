@@ -165,7 +165,7 @@
             <ul id="critical-support-section">
                 <li>
                     <label for="critical-support">Example: Ticket #000555 or This Client cannot use our repo integration</label>
-                    <textarea id="critical-support" name="critical-support" rows="3">Problem about client…</textarea>
+                    <textarea id="critical-support" name="critical-support" rows="3"></textarea>
                 </li>
             </ul>
             <button type="button" onclick="addCriticalSupport()">Add More</button>
@@ -239,7 +239,7 @@
             const li = document.createElement('li');
             li.innerHTML = `
                 <label for="critical-support${count}">Ticket #000555</label>
-                <textarea id="critical-support${count}" name="critical-support${count}" rows="3">Problem about client…</textarea>
+                <textarea id="critical-support${count}" name="critical-support${count}" rows="3"></textarea>
             `;
             section.appendChild(li);
         }
