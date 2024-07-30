@@ -164,7 +164,7 @@
             <h2>Critical Support (clickable) / Challenges</h2>
             <ul id="critical-support-section">
                 <li>
-                    <label for="critical-support">Ticket #000555</label>
+                    <label for="critical-support">Example: Ticket #000555 or Client won't use userKeys</label>
                     <textarea id="critical-support" name="critical-support" rows="3"></textarea>
                 </li>
             </ul>
@@ -292,7 +292,7 @@
             result += '<h3>Critical Support (linkable) / Challenges:</h3>';
             const supports = document.querySelectorAll('#critical-support-section li');
             supports.forEach((support, index) => {
-                result += `<p><strong>Ticket #000555:</strong> ${data.get(`critical-support${index + 1}`)}</p>`;
+                result += `<p><strong>Ticket or Challenge:</strong> ${data.get(`critical-support${index + 1}`)}</p>`;
             });
 
             result += '<h3>JIRA Tickets:</h3>';
