@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Information Collection Form</title>
+    <title>Information Collator</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            line-height: 1.6;
             margin: 20px;
         }
         .section {
@@ -16,305 +17,325 @@
             margin-bottom: 10px;
         }
         .section ul {
-            list-style-type: none;
-            padding-left: 0;
+            margin: 0;
+            padding: 0;
+            list-style-type: disc;
         }
         .section ul li {
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
-        .section label {
-            font-weight: bold;
-        }
-        .section textarea, .section input[type="text"] {
+        textarea {
             width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            margin-bottom: 10px;
+            padding: 5px;
             box-sizing: border-box;
         }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
         .output {
-            white-space: pre-wrap;
-            background-color: #f0f0f0;
-            padding: 20px;
-            border: 1px solid #ccc;
             margin-top: 20px;
         }
-        .buttons {
-            margin-top: 20px;
+        .dynamic-section {
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>Information Collection Form</h1>
-    
-    <form id="infoForm">
-        <div class="section">
-            <h2>Business Use Case With Mend and Challenges</h2>
-            <ul>
-                <li>
-                    <label for="short-term-use-case">Short-term</label>
-                    <textarea id="short-term-use-case" name="short-term-use-case" rows="3"></textarea>
-                </li>
-                <li>
-                    <label for="mid-term-use-case">Mid-term (if different from above)</label>
-                    <textarea id="mid-term-use-case" name="mid-term-use-case" rows="3"></textarea>
-                </li>
-                <li>
-                    <label for="long-term-use-case">Long-term (if different from above)</label>
-                    <textarea id="long-term-use-case" name="long-term-use-case" rows="3"></textarea>
-                </li>
-            </ul>
-        </div>
-        
-        <div class="section">
-            <h2>Steps to Achieve</h2>
-            <ul>
-                <li>
-                    <label for="short-term-steps">Short Term</label>
-                    <textarea id="short-term-steps" name="short-term-steps" rows="3"></textarea>
-                </li>
-                <li>
-                    <label for="mid-term-steps">Mid-term</label>
-                    <textarea id="mid-term-steps" name="mid-term-steps" rows="3"></textarea>
-                </li>
-                <li>
-                    <label for="long-term-steps">Longer-term (if needed)</label>
-                    <textarea id="long-term-steps" name="long-term-steps" rows="3"></textarea>
-                </li>
-            </ul>
-        </div>
-        
-        <div class="section">
-            <h2>Technical Stack</h2>
-            <ul>
-                <li>
-                    <label for="repos">Repo(s):</label>
-                    <input type="text" id="repos" name="repos">
-                </li>
-                <li>
-                    <label for="pipelines">Pipelines:</label>
-                    <input type="text" id="pipelines" name="pipelines">
-                </li>
-                <li>
-                    <label for="languages">Languages / Package Managers:</label>
-                    <input type="text" id="languages" name="languages">
-                </li>
-                <li>
-                    <label for="container-repos">Container Repos?</label>
-                    <input type="text" id="container-repos" name="container-repos">
-                </li>
-                <li>
-                    <label for="issue-trackers">Issue Trackers?</label>
-                    <input type="text" id="issue-trackers" name="issue-trackers">
-                </li>
-            </ul>
-        </div>
+    <div class="section">
+        <h2>Business Use Case With Mend and Challenges</h2>
+        <label for="short-term">Short-term:</label>
+        <textarea id="short-term" name="short-term" rows="2"></textarea>
+        <label for="mid-term">Mid-term:</label>
+        <textarea id="mid-term" name="mid-term" rows="2"></textarea>
+        <label for="long-term">Long-term:</label>
+        <textarea id="long-term" name="long-term" rows="2"></textarea>
+    </div>
 
-        <div class="section">
-            <h2>Key contact(s) who you regularly meet with</h2>
-            <ul id="contacts-section">
-                <li>
-                    <label for="contact1-name">Name:</label>
-                    <input type="text" id="contact1-name" name="contact1-name">
-                    <label for="contact1-geo">Geo:</label>
-                    <input type="text" id="contact1-geo" name="contact1-geo">
-                    <label for="contact1-focus">Focus:</label>
-                    <input type="text" id="contact1-focus" name="contact1-focus">
-                    <label for="contact1-kpis">KPIs:</label>
-                    <input type="text" id="contact1-kpis" name="contact1-kpis">
-                    <label for="contact1-other">Other: Something interesting about them to talk about</label>
-                    <textarea id="contact1-other" name="contact1-other" rows="2"></textarea>
-                </li>
-                <li>
-                    <label for="contact2-name">Name:</label>
-                    <input type="text" id="contact2-name" name="contact2-name">
-                    <label for="contact2-geo">Geo:</label>
-                    <input type="text" id="contact2-geo" name="contact2-geo">
-                    <label for="contact2-focus">Focus:</label>
-                    <input type="text" id="contact2-focus" name="contact2-focus">
-                    <label for="contact2-kpis">KPIs:</label>
-                    <input type="text" id="contact2-kpis" name="contact2-kpis">
-                    <label for="contact2-other">Other: Something interesting about them to talk about</label>
-                    <textarea id="contact2-other" name="contact2-other" rows="2"></textarea>
-                </li>
-            </ul>
-            <button type="button" onclick="addContact()">Add More</button>
-        </div>
+    <div class="section">
+        <h2>Steps to Achieve</h2>
+        <label for="short-term-steps">Short Term:</label>
+        <textarea id="short-term-steps" name="short-term-steps" rows="2"></textarea>
+        <label for="mid-term-steps">Mid-term:</label>
+        <textarea id="mid-term-steps" name="mid-term-steps" rows="2"></textarea>
+        <label for="long-term-steps">Longer-term:</label>
+        <textarea id="long-term-steps" name="long-term-steps" rows="2"></textarea>
+    </div>
 
-        <div class="section">
-            <h2>Expansion / Growth Possibilities</h2>
-            <ul id="expansion-section">
-                <li>
-                    <label for="expansion1-what">What:</label>
-                    <input type="text" id="expansion1-what" name="expansion1-what">
-                    <label for="expansion1-steps">What steps:</label>
-                    <textarea id="expansion1-steps" name="expansion1-steps" rows="2"></textarea>
-                </li>
-                <li>
-                    <label for="expansion2-what">What:</label>
-                    <input type="text" id="expansion2-what" name="expansion2-what">
-                    <label for="expansion2-steps">What steps:</label>
-                    <textarea id="expansion2-steps" name="expansion2-steps" rows="2"></textarea>
-                </li>
-            </ul>
-            <button type="button" onclick="addExpansion()">Add More</button>
-        </div>
+    <div class="section">
+        <h2>Technical Stack</h2>
+        <label for="repo">Repo(s):</label>
+        <textarea id="repo" name="repo" rows="2"></textarea>
+        <label for="pipelines">Pipelines:</label>
+        <textarea id="pipelines" name="pipelines" rows="2"></textarea>
+        <label for="languages">Languages / Package Managers:</label>
+        <textarea id="languages" name="languages" rows="2"></textarea>
+        <label for="containers">Container Repos?:</label>
+        <textarea id="containers" name="containers" rows="2"></textarea>
+        <label for="issue-trackers">Issue Trackers?:</label>
+        <textarea id="issue-trackers" name="issue-trackers" rows="2"></textarea>
+    </div>
 
-        <div class="section">
-            <h2>Critical Support (clickable) / Challenges</h2>
-            <ul id="critical-support-section">
-                <li>
-                    <label for="critical-support">Example: Ticket #000555 or Client won't use userKeys</label>
-                    <textarea id="critical-support" name="critical-support" rows="3"></textarea>
-                </li>
-            </ul>
-            <button type="button" onclick="addCriticalSupport()">Add More</button>
+    <div class="section">
+        <h2>Key contact(s) who you regularly meet with</h2>
+        <div id="contacts">
+            <div class="contact">
+                <label for="contact1-name">Name:</label>
+                <textarea id="contact1-name" name="contact1-name" rows="1"></textarea>
+                <label for="contact1-geo">Geo:</label>
+                <textarea id="contact1-geo" name="contact1-geo" rows="1"></textarea>
+                <label for="contact1-focus">Focus:</label>
+                <textarea id="contact1-focus" name="contact1-focus" rows="1"></textarea>
+                <label for="contact1-kpis">KPIs:</label>
+                <textarea id="contact1-kpis" name="contact1-kpis" rows="1"></textarea>
+                <label for="contact1-other">Other:</label>
+                <textarea id="contact1-other" name="contact1-other" rows="1"></textarea>
+            </div>
+            <!-- Line break between the first and second contact -->
+            <br>
+            <div class="contact">
+                <label for="contact2-name">Name:</label>
+                <textarea id="contact2-name" name="contact2-name" rows="1"></textarea>
+                <label for="contact2-geo">Geo:</label>
+                <textarea id="contact2-geo" name="contact2-geo" rows="1"></textarea>
+                <label for="contact2-focus">Focus:</label>
+                <textarea id="contact2-focus" name="contact2-focus" rows="1"></textarea>
+                <label for="contact2-kpis">KPIs:</label>
+                <textarea id="contact2-kpis" name="contact2-kpis" rows="1"></textarea>
+                <label for="contact2-other">Other:</label>
+                <textarea id="contact2-other" name="contact2-other" rows="1"></textarea>
+            </div>
         </div>
+        <button type="button" onclick="addContact()">Add More Contacts</button>
+    </div>
 
-        <div class="section">
-            <h2>JIRA Tickets or Slack Chains</h2>
-            <ul id="jira-tickets-section">
-                <li>
-                    <label for="jira-tka">TKA-*** Short description (make clickable)</label>
-                    <input type="text" id="jira-tka" name="jira-tka">
-                </li>
-                <li>
-                    <label for="jira-wsh">WSH-*** Short description (make clickable)</label>
-                    <input type="text" id="jira-wsh" name="jira-wsh">
-                </li>
-                <li>
-                    <label for="slack-chain">Slack Chain*** - Short description (make clickable)</label>
-                    <input type="text" id="slack-chain" name="slack-chain">
-                </li>
-            </ul>
-            <button type="button" onclick="addJiraTicket()">Add More</button>
+    <div class="section">
+        <h2>Expansion / Growth Possibilities</h2>
+        <div id="expansions">
+            <div class="expansion">
+                <label for="expansion1-what">What:</label>
+                <textarea id="expansion1-what" name="expansion1-what" rows="1"></textarea>
+                <label for="expansion1-steps">What steps:</label>
+                <textarea id="expansion1-steps" name="expansion1-steps" rows="2"></textarea>
+            </div>
         </div>
-        
-        <div class="buttons">
-            <button type="button" onclick="collateInfo()">Submit</button>
-            <button type="button" onclick="copyToClipboard()">Copy to Clipboard</button>
+        <button type="button" onclick="addExpansion()">Add More Expansions</button>
+    </div>
+
+    <div class="section">
+        <h2>Critical Support (clickable) / Challenges</h2>
+        <div id="critical-supports">
+            <div class="critical-support">
+                <label for="critical-support">Ticket or Challenge:</label>
+                <textarea id="critical-support" name="critical-support" rows="2"></textarea>
+            </div>
         </div>
-    </form>
-    
+        <button type="button" onclick="addCriticalSupport()">Add More Critical Supports</button>
+    </div>
+
+    <div class="section">
+        <h2>Jira Tickets or Slack Chains (make linkable)</h2>
+        <div id="jira-tickets">
+            <div class="jira-ticket">
+                <label for="jira-ticket-1">JIRA Ticket 1:</label>
+                <textarea id="jira-ticket-1" name="jira-ticket-1" rows="2"></textarea>
+            </div>
+        </div>
+        <button type="button" onclick="addJiraTicket()">Add More JIRA Tickets</button>
+    </div>
+
+    <button type="button" onclick="generateOutput()">Generate Output</button>
+    <button type="button" onclick="copyToClipboard()">Copy to Clipboard</button>
+
     <div id="output" class="output"></div>
 
     <script>
+        let contactCount = 2; // Starting count at 2 because initial contacts are already present
+        let expansionCount = 1;
+        let criticalSupportCount = 1;
+        let jiraTicketCount = 1;
+
         function addContact() {
-            const section = document.getElementById('contacts-section');
-            const count = section.children.length + 1;
-            const li = document.createElement('li');
-            li.innerHTML = `
-                <label for="contact${count}-name">Name:</label>
-                <input type="text" id="contact${count}-name" name="contact${count}-name">
-                <label for="contact${count}-geo">Geo:</label>
-                <input type="text" id="contact${count}-geo" name="contact${count}-geo">
-                <label for="contact${count}-focus">Focus:</label>
-                <input type="text" id="contact${count}-focus" name="contact${count}-focus">
-                <label for="contact${count}-kpis">KPIs:</label>
-                <input type="text" id="contact${count}-kpis" name="contact${count}-kpis">
-                <label for="contact${count}-other">Other: Something interesting about them to talk about</label>
-                <textarea id="contact${count}-other" name="contact${count}-other" rows="2"></textarea>
+            contactCount++;
+            const contactDiv = document.createElement("div");
+            contactDiv.classList.add("contact");
+            contactDiv.innerHTML = `
+                <label for="contact${contactCount}-name">Name:</label>
+                <textarea id="contact${contactCount}-name" name="contact${contactCount}-name" rows="1"></textarea>
+                <label for="contact${contactCount}-geo">Geo:</label>
+                <textarea id="contact${contactCount}-geo" name="contact${contactCount}-geo" rows="1"></textarea>
+                <label for="contact${contactCount}-focus">Focus:</label>
+                <textarea id="contact${contactCount}-focus" name="contact${contactCount}-focus" rows="1"></textarea>
+                <label for="contact${contactCount}-kpis">KPIs:</label>
+                <textarea id="contact${contactCount}-kpis" name="contact${contactCount}-kpis" rows="1"></textarea>
+                <label for="contact${contactCount}-other">Other:</label>
+                <textarea id="contact${contactCount}-other" name="contact${contactCount}-other" rows="1"></textarea>
             `;
-            section.appendChild(li);
+            document.getElementById("contacts").appendChild(contactDiv);
         }
 
         function addExpansion() {
-            const section = document.getElementById('expansion-section');
-            const count = section.children.length + 1;
-            const li = document.createElement('li');
-            li.innerHTML = `
-                <label for="expansion${count}-what">What:</label>
-                <input type="text" id="expansion${count}-what" name="expansion${count}-what">
-                <label for="expansion${count}-steps">What steps:</label>
-                <textarea id="expansion${count}-steps" name="expansion${count}-steps" rows="2"></textarea>
+            expansionCount++;
+            const expansionDiv = document.createElement("div");
+            expansionDiv.classList.add("expansion");
+            expansionDiv.innerHTML = `
+                <label for="expansion${expansionCount}-what">What:</label>
+                <textarea id="expansion${expansionCount}-what" name="expansion${expansionCount}-what" rows="1"></textarea>
+                <label for="expansion${expansionCount}-steps">What steps:</label>
+                <textarea id="expansion${expansionCount}-steps" name="expansion${expansionCount}-steps" rows="2"></textarea>
             `;
-            section.appendChild(li);
+            document.getElementById("expansions").appendChild(expansionDiv);
         }
 
         function addCriticalSupport() {
-            const section = document.getElementById('critical-support-section');
-            const count = section.children.length + 1;
-            const li = document.createElement('li');
-            li.innerHTML = `
-                <label for="critical-support${count}">Example: Ticket #000555 or Client won't use userKeys</label>
-                <textarea id="critical-support${count}" name="critical-support${count}" rows="3"></textarea>
+            criticalSupportCount++;
+            const criticalSupportDiv = document.createElement("div");
+            criticalSupportDiv.classList.add("critical-support");
+            criticalSupportDiv.innerHTML = `
+                <label for="critical-support-${criticalSupportCount}">Ticket or Challenge:</label>
+                <textarea id="critical-support-${criticalSupportCount}" name="critical-support-${criticalSupportCount}" rows="2"></textarea>
             `;
-            section.appendChild(li);
+            document.getElementById("critical-supports").appendChild(criticalSupportDiv);
         }
 
         function addJiraTicket() {
-            const section = document.getElementById('jira-tickets-section');
-            const count = section.children.length + 1;
-            const li = document.createElement('li');
-            li.innerHTML = `
-                <label for="jira-ticket${count}">JIRA Ticket ${count}</label>
-                <input type="text" id="jira-ticket${count}" name="jira-ticket${count}">
+            jiraTicketCount++;
+            const jiraTicketDiv = document.createElement("div");
+            jiraTicketDiv.classList.add("jira-ticket");
+            jiraTicketDiv.innerHTML = `
+                <label for="jira-ticket-${jiraTicketCount}">JIRA Ticket ${jiraTicketCount}:</label>
+                <textarea id="jira-ticket-${jiraTicketCount}" name="jira-ticket-${jiraTicketCount}" rows="2"></textarea>
             `;
-            section.appendChild(li);
+            document.getElementById("jira-tickets").appendChild(jiraTicketDiv);
         }
 
         function collateInfo() {
-            const form = document.getElementById('infoForm');
-            const output = document.getElementById('output');
-            const data = new FormData(form);
-            
-            let result = '<h2>Collected Information:</h2>';
-            
-            result += '<h3>Business Use Case With Mend and Challenges:</h3>';
-            result += '<p><strong>Short-term:</strong> ' + data.get('short-term-use-case') + '</p>';
-            result += '<p><strong>Mid-term:</strong> ' + data.get('mid-term-use-case') + '</p>';
-            result += '<p><strong>Long-term:</strong> ' + data.get('long-term-use-case') + '</p>';
-            
-            result += '<h3>Steps to Achieve:</h3>';
-            result += '<p><strong>Short Term:</strong> ' + data.get('short-term-steps') + '</p>';
-            result += '<p><strong>Mid-term:</strong> ' + data.get('mid-term-steps') + '</p>';
-            result += '<p><strong>Longer-term:</strong> ' + data.get('long-term-steps') + '</p>';
-            
-            result += '<h3>Technical Stack:</h3>';
-            result += '<p><strong>Repo(s):</strong> ' + data.get('repos') + '</p>';
-            result += '<p><strong>Pipelines:</strong> ' + data.get('pipelines') + '</p>';
-            result += '<p><strong>Languages / Package Managers:</strong> ' + data.get('languages') + '</p>';
-            result += '<p><strong>Container Repos?:</strong> ' + data.get('container-repos') + '</p>';
-            result += '<p><strong>Issue Trackers?:</strong> ' + data.get('issue-trackers') + '</p>';
-            
-            result += '<h3>Key contact(s) who you regularly meet with:</h3>';
-            const contacts = document.querySelectorAll('#contacts-section li');
-            contacts.forEach((contact, index) => {
-                result += `<p><strong>Name:</strong> ${data.get(`contact${index + 1}-name`)}<br><strong>Geo:</strong> ${data.get(`contact${index + 1}-geo`)}<br><strong>Focus:</strong> ${data.get(`contact${index + 1}-focus`)}<br><strong>KPIs:</strong> ${data.get(`contact${index + 1}-kpis`)}<br><strong>Other:</strong> ${data.get(`contact${index + 1}-other`)}</p>`;
-            });
+            const data = {
+                "Business Use Case With Mend and Challenges": {
+                    "Short-term": document.getElementById("short-term").value.trim() || '',
+                    "Mid-term": document.getElementById("mid-term").value.trim() || '',
+                    "Long-term": document.getElementById("long-term").value.trim() || ''
+                },
+                "Steps to Achieve": {
+                    "Short Term": document.getElementById("short-term-steps").value.trim() || '',
+                    "Mid-term": document.getElementById("mid-term-steps").value.trim() || '',
+                    "Longer-term": document.getElementById("long-term-steps").value.trim() || ''
+                },
+                "Technical Stack": {
+                    "Repo(s)": document.getElementById("repo").value.trim() || '',
+                    "Pipelines": document.getElementById("pipelines").value.trim() || '',
+                    "Languages / Package Managers": document.getElementById("languages").value.trim() || '',
+                    "Container Repos?": document.getElementById("containers").value.trim() || '',
+                    "Issue Trackers?": document.getElementById("issue-trackers").value.trim() || ''
+                },
+                "Key contact(s) who you regularly meet with": Array.from(document.querySelectorAll("#contacts .contact")).map(contact => ({
+                    "Name": contact.querySelector("textarea[name*='name']").value.trim() || '',
+                    "Geo": contact.querySelector("textarea[name*='geo']").value.trim() || '',
+                    "Focus": contact.querySelector("textarea[name*='focus']").value.trim() || '',
+                    "KPIs": contact.querySelector("textarea[name*='kpis']").value.trim() || '',
+                    "Other": contact.querySelector("textarea[name*='other']").value.trim() || ''
+                })),
+                "Expansion / Growth Possibilities": Array.from(document.querySelectorAll("#expansions .expansion")).map(expansion => ({
+                    "What": expansion.querySelector("textarea[name*='what']").value.trim() || '',
+                    "What steps": expansion.querySelector("textarea[name*='steps']").value.trim() || ''
+                })),
+                "Critical Support (clickable) / Challenges": Array.from(document.querySelectorAll("#critical-supports .critical-support")).map(support => (
+                    support.querySelector("textarea").value.trim() || ''
+                )),
+                "Jira Tickets or Slack Chains (make linkable)": Array.from(document.querySelectorAll("#jira-tickets .jira-ticket")).map(ticket => (
+                    ticket.querySelector("textarea").value.trim() || ''
+                ))
+            };
 
-            result += '<h3>Expansion / Growth Possibilities:</h3>';
-            const expansions = document.querySelectorAll('#expansion-section li');
-            expansions.forEach((expansion, index) => {
-                result += `<p><strong>What:</strong> ${data.get(`expansion${index + 1}-what`)}<br><strong>What steps:</strong> ${data.get(`expansion${index + 1}-steps`)}</p>`;
-            });
+            return `
+                <div id="output" class="output">
+                    <p><strong>Business Use Case With Mend and Challenges:</strong></p>
+                    <ul>
+                        <li><strong>Short-term:</strong> ${data["Business Use Case With Mend and Challenges"]["Short-term"]}</li>
+                        <li><strong>Mid-term:</strong> ${data["Business Use Case With Mend and Challenges"]["Mid-term"]}</li>
+                        <li><strong>Long-term:</strong> ${data["Business Use Case With Mend and Challenges"]["Long-term"]}</li>
+                    </ul>
 
-            result += '<h3>Critical Support (linkable) / Challenges:</h3>';
-            const supports = document.querySelectorAll('#critical-support-section li');
-            supports.forEach((support, index) => {
-                result += `<p><strong>Ticket or Challenge:</strong> ${data.get(`critical-support${index + 1}`)}</p>`;
-            });
+                    <p><strong>Steps to Achieve:</strong></p>
+                    <ul>
+                        <li><strong>Short Term:</strong> ${data["Steps to Achieve"]["Short Term"]}</li>
+                        <li><strong>Mid-term:</strong> ${data["Steps to Achieve"]["Mid-term"]}</li>
+                        <li><strong>Longer-term:</strong> ${data["Steps to Achieve"]["Longer-term"]}</li>
+                    </ul>
 
-            result += '<h3>JIRA Tickets:</h3>';
-            const tickets = document.querySelectorAll('#jira-tickets-section li');
-            tickets.forEach((ticket, index) => {
-                result += `<p><strong>JIRA Ticket ${index + 1}:</strong> ${data.get(`jira-ticket${index + 1}`)}</p>`;
-            });
-            
-            output.innerHTML = result;
+                    <p><strong>Technical Stack:</strong></p>
+                    <ul>
+                        <li><strong>Repo(s):</strong> ${data["Technical Stack"]["Repo(s)"]}</li>
+                        <li><strong>Pipelines:</strong> ${data["Technical Stack"]["Pipelines"]}</li>
+                        <li><strong>Languages / Package Managers:</strong> ${data["Technical Stack"]["Languages / Package Managers"]}</li>
+                        <li><strong>Container Repos?:</strong> ${data["Technical Stack"]["Container Repos?"]}</li>
+                        <li><strong>Issue Trackers?:</strong> ${data["Technical Stack"]["Issue Trackers?"]}</li>
+                    </ul>
+
+                    <p><strong>Key contact(s) who you regularly meet with:</strong></p>
+                    ${data["Key contact(s) who you regularly meet with"].map((contact, index) => `
+                        <ul>
+                            <li><strong>Name:</strong> ${contact["Name"]}</li>
+                            <li><strong>Geo:</strong> ${contact["Geo"]}</li>
+                            <li><strong>Focus:</strong> ${contact["Focus"]}</li>
+                            <li><strong>KPIs:</strong> ${contact["KPIs"]}</li>
+                            <li><strong>Other:</strong> ${contact["Other"]}</li>
+                        </ul>
+                        ${index < data["Key contact(s) who you regularly meet with"].length - 1 ? '<br>' : ''}
+                    `).join('')}
+
+                    <p><strong>Expansion / Growth Possibilities:</strong></p>
+                    ${data["Expansion / Growth Possibilities"].map(expansion => `
+                        <ul>
+                            <li><strong>What:</strong> ${expansion["What"]}</li>
+                            <li><strong>What steps:</strong> ${expansion["What steps"]}</li>
+                        </ul>
+                    `).join('')}
+
+                    <p><strong>Critical Support (clickable) / Challenges:</strong></p>
+                    ${data["Critical Support (clickable) / Challenges"].map(support => `
+                        <ul>
+                            <li><strong>Ticket or Challenge:</strong> ${support}</li>
+                        </ul>
+                    `).join('')}
+
+                    <p><strong>Jira Tickets or Slack Chains (make linkable):</strong></p>
+                    ${data["Jira Tickets or Slack Chains (make linkable)"].map(ticket => `
+                        <ul>
+                            <li><strong>JIRA Ticket:</strong> ${ticket}</li>
+                        </ul>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function generateOutput() {
+            const outputDiv = document.getElementById("output");
+            outputDiv.innerHTML = collateInfo();
         }
 
         function copyToClipboard() {
-            const output = document.getElementById('output');
+            const outputDiv = document.getElementById("output");
             const range = document.createRange();
-            range.selectNode(output);
+            range.selectNode(outputDiv);
             window.getSelection().removeAllRanges();
             window.getSelection().addRange(range);
-            document.execCommand('copy');
+            try {
+                document.execCommand('copy');
+                alert('Copied to clipboard!');
+            } catch (err) {
+                alert('Failed to copy to clipboard.');
+            }
             window.getSelection().removeAllRanges();
-            alert('Output copied to clipboard!');
         }
     </script>
 </body>
 </html>
-
