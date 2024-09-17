@@ -85,6 +85,18 @@
     </div>
 
     <div class="section">
+        <h2>Platform Tech</h2>
+        <label for="sast-competition">SAST Competition?</label>
+        <textarea id="sast-competition" name="sast-competition" rows="2"></textarea>
+        <label for="container-scanning">Container Scanning?</label>
+        <textarea id="container-scanning" name="container-scanning" rows="2"></textarea>
+        <label for="secrets-detection">Secrets detection?</label>
+        <textarea id="secrets-detection" name="secrets-detection" rows="2"></textarea>
+        <label for="kubernetes-tracking">Kubernetes Tracking?</label>
+        <textarea id="kubernetes-tracking" name="kubernetes-tracking" rows="2"></textarea>
+    </div>
+
+    <div class="section">
         <h2>Key contact(s) who you regularly meet with</h2>
         <div id="contacts">
             <div class="contact">
@@ -99,7 +111,6 @@
                 <label for="contact1-other">Other:</label>
                 <textarea id="contact1-other" name="contact1-other" rows="1"></textarea>
             </div>
-            <!-- Line break between the first and second contact -->
             <br><br>
             <div class="contact">
                 <label for="contact2-name">Name:</label>
@@ -236,6 +247,12 @@
                     "Container Repos?": document.getElementById("containers").value.trim() || '',
                     "Issue Trackers?": document.getElementById("issue-trackers").value.trim() || ''
                 },
+                "Platform Tech": {
+                    "SAST Competition?": document.getElementById("sast-competition").value.trim() || '',
+                    "Container Scanning?": document.getElementById("container-scanning").value.trim() || '',
+                    "Secrets detection?": document.getElementById("secrets-detection").value.trim() || '',
+                    "Kubernetes Tracking?": document.getElementById("kubernetes-tracking").value.trim() || ''
+                },
                 "Key contact(s) who you regularly meet with": Array.from(document.querySelectorAll("#contacts .contact")).map(contact => ({
                     "Name": contact.querySelector("textarea[name*='name']").value.trim() || '',
                     "Geo": contact.querySelector("textarea[name*='geo']").value.trim() || '',
@@ -280,8 +297,16 @@
                         <li><strong>Issue Trackers?:</strong> ${data["Technical Stack"]["Issue Trackers?"]}</li>
                     </ul>
 
+                    <p><strong>Platform Tech:</strong></p>
+                    <ul>
+                        <li><strong>SAST Competition?:</strong> ${data["Platform Tech"]["SAST Competition?"]}</li>
+                        <li><strong>Container Scanning?:</strong> ${data["Platform Tech"]["Container Scanning?"]}</li>
+                        <li><strong>Secrets detection?:</strong> ${data["Platform Tech"]["Secrets detection?"]}</li>
+                        <li><strong>Kubernetes Tracking?:</strong> ${data["Platform Tech"]["Kubernetes Tracking?"]}</li>
+                    </ul>
+
                     <p><strong>Key contact(s) who you regularly meet with:</strong></p>
-                    ${data["Key contact(s) who you regularly meet with"].map((contact, index) => `
+                    ${data["Key contact(s) who you regularly meet with"].map(contact => `
                         <ul>
                             <li><strong>Name:</strong> ${contact["Name"]}</li>
                             <li><strong>Geo:</strong> ${contact["Geo"]}</li>
@@ -289,7 +314,6 @@
                             <li><strong>KPIs:</strong> ${contact["KPIs"]}</li>
                             <li><strong>Other:</strong> ${contact["Other"]}</li>
                         </ul>
-                        ${index < data["Key contact(s) who you regularly meet with"].length - 1 ? '<br>' : ''}
                     `).join('')}
 
                     <p><strong>Expansion / Growth Possibilities:</strong></p>
