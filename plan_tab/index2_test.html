@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information Collator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            margin-bottom: 10px;
+        }
+        .section ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: disc;
+        }
+        .section ul li {
+            margin-bottom: 5px;
+        }
+        textarea {
+            width: 100%;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .output {
+            margin-top: 20px;
+        }
+        .dynamic-section {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="section">
+        <h2>Business Use Case With Mend and Challenges</h2>
+        <label for="short-term">Short-term:</label>
+        <textarea id="short-term" name="short-term" rows="2"></textarea>
+        <label for="mid-term">Mid-term:</label>
+        <textarea id="mid-term" name="mid-term" rows="2"></textarea>
+        <label for="long-term">Long-term:</label>
+        <textarea id="long-term" name="long-term" rows="2"></textarea>
+    </div>
+
+    <div class="section">
+        <h2>Steps to Achieve</h2>
+        <label for="short-term-steps">Short Term:</label>
+        <textarea id="short-term-steps" name="short-term-steps" rows="2"></textarea>
+        <label for="mid-term-steps">Mid-term:</label>
+        <textarea id="mid-term-steps" name="mid-term-steps" rows="2"></textarea>
+        <label for="long-term-steps">Longer-term:</label>
+        <textarea id="long-term-steps" name="long-term-steps" rows="2"></textarea>
+    </div>
+
+    <div class="section">
+        <h2>Technical Stack</h2>
+        <label for="repo">Repo(s):</label>
+        <textarea id="repo" name="repo" rows="2"></textarea>
+        <label for="pipelines">Pipelines:</label>
+        <textarea id="pipelines" name="pipelines" rows="2"></textarea>
+        <label for="languages">Languages / Package Managers:</label>
+        <textarea id="languages" name="languages" rows="2"></textarea>
+        <label for="containers">Container Repos?:</label>
+        <textarea id="containers" name="containers" rows="2"></textarea>
+        <label for="issue-trackers">Issue Trackers?:</label>
+        <textarea id="issue-trackers" name="issue-trackers" rows="2"></textarea>
+    </div>
+
+    <div class="section">
+        <h2>Key contact(s) who you regularly meet with</h2>
+        <div id="contacts">
+            <div class="contact">
+                <label for="contact1-name">Name:</label>
+                <textarea id="contact1-name" name="contact1-name" rows="1"></textarea>
+                <label for="contact1-geo">Geo:</label>
+                <textarea id="contact1-geo" name="contact1-geo" rows="1"></textarea>
+                <label for="contact1-focus">Focus:</label>
+                <textarea id="contact1-focus" name="contact1-focus" rows="1"></textarea>
+                <label for="contact1-kpis">KPIs:</label>
+                <textarea id="contact1-kpis" name="contact1-kpis" rows="1"></textarea>
+                <label for="contact1-other">Other:</label>
+                <textarea id="contact1-other" name="contact1-other" rows="1"></textarea>
+            </div>
+            <!-- Line break between the first and second contact -->
+            <br><br>
+            <div class="contact">
+                <label for="contact2-name">Name:</label>
+                <textarea id="contact2-name" name="contact2-name" rows="1"></textarea>
+                <label for="contact2-geo">Geo:</label>
+                <textarea id="contact2-geo" name="contact2-geo" rows="1"></textarea>
+                <label for="contact2-focus">Focus:</label>
+                <textarea id="contact2-focus" name="contact2-focus" rows="1"></textarea>
+                <label for="contact2-kpis">KPIs:</label>
+                <textarea id="contact2-kpis" name="contact2-kpis" rows="1"></textarea>
+                <label for="contact2-other">Other:</label>
+                <textarea id="contact2-other" name="contact2-other" rows="1"></textarea>
+            </div>
+        </div>
+        <button type="button" onclick="addContact()">Add More Contacts</button>
+    </div>
+
+    <div class="section">
+        <h2>Expansion / Growth Possibilities</h2>
+        <div id="expansions">
+            <div class="expansion">
+                <label for="expansion1-what">What:</label>
+                <textarea id="expansion1-what" name="expansion1-what" rows="1"></textarea>
+                <label for="expansion1-steps">What steps:</label>
+                <textarea id="expansion1-steps" name="expansion1-steps" rows="2"></textarea>
+            </div>
+        </div>
+        <button type="button" onclick="addExpansion()">Add More Expansions</button>
+    </div>
+
+    <div class="section">
+        <h2>Critical Support (clickable) / Challenges</h2>
+        <div id="critical-supports">
+            <div class="critical-support">
+                <label for="critical-support">Ticket or Challenge:</label>
+                <textarea id="critical-support" name="critical-support" rows="2"></textarea>
+            </div>
+        </div>
+        <button type="button" onclick="addCriticalSupport()">Add More Critical Supports</button>
+    </div>
+
+    <div class="section">
+        <h2>Jira Tickets or Slack Chains (make linkable)</h2>
+        <div id="jira-tickets">
+            <div class="jira-ticket">
+                <label for="jira-ticket-1">JIRA Ticket 1:</label>
+                <textarea id="jira-ticket-1" name="jira-ticket-1" rows="2"></textarea>
+            </div>
+        </div>
+        <button type="button" onclick="addJiraTicket()">Add More JIRA Tickets</button>
+    </div>
+
+    <button type="button" onclick="generateOutput()">Generate Output</button>
+    <button type="button" onclick="copyToClipboard()">Copy to Clipboard</button>
+
+    <div id="output" class="output"></div>
+
+    <script>
+        let contactCount = 2; // Starting count at 2 because initial contacts are already present
+        let expansionCount = 1;
+        let criticalSupportCount = 1;
+        let jiraTicketCount = 1;
+
+        function addContact() {
+            contactCount++;
+            const contactDiv = document.createElement("div");
+            contactDiv.classList.add("contact");
+            contactDiv.innerHTML = `
+                <label for="contact${contactCount}-name">Name:</label>
+                <textarea id="contact${contactCount}-name" name="contact${contactCount}-name" rows="1"></textarea>
+                <label for="contact${contactCount}-geo">Geo:</label>
+                <textarea id="contact${contactCount}-geo" name="contact${contactCount}-geo" rows="1"></textarea>
+                <label for="contact${contactCount}-focus">Focus:</label>
+                <textarea id="contact${contactCount}-focus" name="contact${contactCount}-focus" rows="1"></textarea>
+                <label for="contact${contactCount}-kpis">KPIs:</label>
+                <textarea id="contact${contactCount}-kpis" name="contact${contactCount}-kpis" rows="1"></textarea>
+                <label for="contact${contactCount}-other">Other:</label>
+                <textarea id="contact${contactCount}-other" name="contact${contactCount}-other" rows="1"></textarea>
+            `;
+            document.getElementById("contacts").appendChild(contactDiv);
+        }
+
+        function addExpansion() {
+            expansionCount++;
+            const expansionDiv = document.createElement("div");
+            expansionDiv.classList.add("expansion");
+            expansionDiv.innerHTML = `
+                <label for="expansion${expansionCount}-what">What:</label>
+                <textarea id="expansion${expansionCount}-what" name="expansion${expansionCount}-what" rows="1"></textarea>
+                <label for="expansion${expansionCount}-steps">What steps:</label>
+                <textarea id="expansion${expansionCount}-steps" name="expansion${expansionCount}-steps" rows="2"></textarea>
+            `;
+            document.getElementById("expansions").appendChild(expansionDiv);
+        }
+
+        function addCriticalSupport() {
+            criticalSupportCount++;
+            const criticalSupportDiv = document.createElement("div");
+            criticalSupportDiv.classList.add("critical-support");
+            criticalSupportDiv.innerHTML = `
+                <label for="critical-support-${criticalSupportCount}">Ticket or Challenge:</label>
+                <textarea id="critical-support-${criticalSupportCount}" name="critical-support-${criticalSupportCount}" rows="2"></textarea>
+            `;
+            document.getElementById("critical-supports").appendChild(criticalSupportDiv);
+        }
+
+        function addJiraTicket() {
+            jiraTicketCount++;
+            const jiraTicketDiv = document.createElement("div");
+            jiraTicketDiv.classList.add("jira-ticket");
+            jiraTicketDiv.innerHTML = `
+                <label for="jira-ticket-${jiraTicketCount}">JIRA Ticket ${jiraTicketCount}:</label>
+                <textarea id="jira-ticket-${jiraTicketCount}" name="jira-ticket-${jiraTicketCount}" rows="2"></textarea>
+            `;
+            document.getElementById("jira-tickets").appendChild(jiraTicketDiv);
+        }
+
+        function collateInfo() {
+            const data = {
+                "Business Use Case With Mend and Challenges": {
+                    "Short-term": document.getElementById("short-term").value.trim() || '',
+                    "Mid-term": document.getElementById("mid-term").value.trim() || '',
+                    "Long-term": document.getElementById("long-term").value.trim() || ''
+                },
+                "Steps to Achieve": {
+                    "Short Term": document.getElementById("short-term-steps").value.trim() || '',
+                    "Mid-term": document.getElementById("mid-term-steps").value.trim() || '',
+                    "Longer-term": document.getElementById("long-term-steps").value.trim() || ''
+                },
+                "Technical Stack": {
+                    "Repo(s)": document.getElementById("repo").value.trim() || '',
+                    "Pipelines": document.getElementById("pipelines").value.trim() || '',
+                    "Languages / Package Managers": document.getElementById("languages").value.trim() || '',
+                    "Container Repos?": document.getElementById("containers").value.trim() || '',
+                    "Issue Trackers?": document.getElementById("issue-trackers").value.trim() || ''
+                },
+                "Key contact(s) who you regularly meet with": Array.from(document.querySelectorAll("#contacts .contact")).map(contact => ({
+                    "Name": contact.querySelector("textarea[name*='name']").value.trim() || '',
+                    "Geo": contact.querySelector("textarea[name*='geo']").value.trim() || '',
+                    "Focus": contact.querySelector("textarea[name*='focus']").value.trim() || '',
+                    "KPIs": contact.querySelector("textarea[name*='kpis']").value.trim() || '',
+                    "Other": contact.querySelector("textarea[name*='other']").value.trim() || ''
+                })),
+                "Expansion / Growth Possibilities": Array.from(document.querySelectorAll("#expansions .expansion")).map(expansion => ({
+                    "What": expansion.querySelector("textarea[name*='what']").value.trim() || '',
+                    "What steps": expansion.querySelector("textarea[name*='steps']").value.trim() || ''
+                })),
+                "Critical Support (clickable) / Challenges": Array.from(document.querySelectorAll("#critical-supports .critical-support")).map(support => (
+                    support.querySelector("textarea").value.trim() || ''
+                )),
+                "Jira Tickets or Slack Chains (make linkable)": Array.from(document.querySelectorAll("#jira-tickets .jira-ticket")).map(ticket => (
+                    ticket.querySelector("textarea").value.trim() || ''
+                ))
+            };
+
+            return `
+                <div id="output" class="output">
+                    <p><strong>Business Use Case With Mend and Challenges:</strong></p>
+                    <ul>
+                        <li><strong>Short-term:</strong> ${data["Business Use Case With Mend and Challenges"]["Short-term"]}</li>
+                        <li><strong>Mid-term:</strong> ${data["Business Use Case With Mend and Challenges"]["Mid-term"]}</li>
+                        <li><strong>Long-term:</strong> ${data["Business Use Case With Mend and Challenges"]["Long-term"]}</li>
+                    </ul>
+
+                    <p><strong>Steps to Achieve:</strong></p>
+                    <ul>
+                        <li><strong>Short Term:</strong> ${data["Steps to Achieve"]["Short Term"]}</li>
+                        <li><strong>Mid-term:</strong> ${data["Steps to Achieve"]["Mid-term"]}</li>
+                        <li><strong>Longer-term:</strong> ${data["Steps to Achieve"]["Longer-term"]}</li>
+                    </ul>
+
+                    <p><strong>Technical Stack:</strong></p>
+                    <ul>
+                        <li><strong>Repo(s):</strong> ${data["Technical Stack"]["Repo(s)"]}</li>
+                        <li><strong>Pipelines:</strong> ${data["Technical Stack"]["Pipelines"]}</li>
+                        <li><strong>Languages / Package Managers:</strong> ${data["Technical Stack"]["Languages / Package Managers"]}</li>
+                        <li><strong>Container Repos?:</strong> ${data["Technical Stack"]["Container Repos?"]}</li>
+                        <li><strong>Issue Trackers?:</strong> ${data["Technical Stack"]["Issue Trackers?"]}</li>
+                    </ul>
+
+                    <p><strong>Key contact(s) who you regularly meet with:</strong></p>
+                    ${data["Key contact(s) who you regularly meet with"].map((contact, index) => `
+                        <ul>
+                            <li><strong>Name:</strong> ${contact["Name"]}</li>
+                            <li><strong>Geo:</strong> ${contact["Geo"]}</li>
+                            <li><strong>Focus:</strong> ${contact["Focus"]}</li>
+                            <li><strong>KPIs:</strong> ${contact["KPIs"]}</li>
+                            <li><strong>Other:</strong> ${contact["Other"]}</li>
+                        </ul>
+                        ${index < data["Key contact(s) who you regularly meet with"].length - 1 ? '<br>' : ''}
+                    `).join('')}
+
+                    <p><strong>Expansion / Growth Possibilities:</strong></p>
+                    ${data["Expansion / Growth Possibilities"].map(expansion => `
+                        <ul>
+                            <li><strong>What:</strong> ${expansion["What"]}</li>
+                            <li><strong>What steps:</strong> ${expansion["What steps"]}</li>
+                        </ul>
+                    `).join('')}
+
+                    <p><strong>Critical Support (clickable) / Challenges:</strong></p>
+                    ${data["Critical Support (clickable) / Challenges"].map(support => `
+                        <ul>
+                            <li><strong>Ticket or Challenge:</strong> ${support}</li>
+                        </ul>
+                    `).join('')}
+
+                    <p><strong>Jira Tickets or Slack Chains (make linkable):</strong></p>
+                    ${data["Jira Tickets or Slack Chains (make linkable)"].map(ticket => `
+                        <ul>
+                            <li><strong>JIRA Ticket:</strong> ${ticket}</li>
+                        </ul>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function generateOutput() {
+            const outputDiv = document.getElementById("output");
+            outputDiv.innerHTML = collateInfo();
+        }
+
+        function copyToClipboard() {
+            const outputDiv = document.getElementById("output");
+            const range = document.createRange();
+            range.selectNode(outputDiv);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            try {
+                document.execCommand('copy');
+                alert('Copied to clipboard!');
+            } catch (err) {
+                alert('Failed to copy to clipboard.');
+            }
+            window.getSelection().removeAllRanges();
+        }
+    </script>
+</body>
+</html>
